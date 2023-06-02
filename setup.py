@@ -215,7 +215,7 @@ c_options['use_x11'] = False
 c_options['use_wayland'] = False
 c_options['use_gstreamer'] = None
 c_options['use_avfoundation'] = platform in ['darwin', 'ios']
-c_options['use_osx_frameworks'] = platform == 'darwin'
+c_options['use_osx_frameworks'] = platform in ['darwin', 'ios']#platform == 'darwin'
 c_options['debug_gl'] = False
 
 # Set the alpha size, this will be 0 on the Raspberry Pi and 8 on all other
@@ -251,7 +251,7 @@ can_use_cython = True
 if platform in ('ios', 'android'):
     # NEVER use or declare cython on these platforms
     print('Not using cython on %s' % platform)
-    can_use_cython = False
+    can_use_cython = True
 
 
 # -----------------------------------------------------------------------------
@@ -525,7 +525,7 @@ can_autodetect_sdl2 = (
 if c_options['use_sdl2'] or can_autodetect_sdl2:
 
     sdl2_valid = False
-    if c_options['use_osx_frameworks'] and platform == 'darwin':
+    if c_options['use_osx_frameworks'] and platform in ['darwin', 'ios']:
         # check the existence of frameworks
         if KIVY_DEPS_ROOT:
             default_sdl2_frameworks_search_path = join(
@@ -795,7 +795,7 @@ def determine_sdl2():
 
     if sdl2_flags:
         flags = merge(flags, sdl2_flags)
-
+    print(flags['include_dirs'])
     # ensure headers for all the SDL2 and sub libraries are available
     libs_to_check = ['SDL', 'SDL_mixer', 'SDL_ttf', 'SDL_image']
     can_compile = True
