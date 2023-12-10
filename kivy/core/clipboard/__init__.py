@@ -109,24 +109,26 @@ class ClipboardBase(object):
 
 # load clipboard implementation
 _clipboards = []
-if platform == 'android':
-    _clipboards.append(
-        ('android', 'clipboard_android', 'ClipboardAndroid'))
-elif platform == 'macosx':
-    _clipboards.append(
-        ('nspaste', 'clipboard_nspaste', 'ClipboardNSPaste'))
-elif platform == 'win':
-    _clipboards.append(
-        ('winctypes', 'clipboard_winctypes', 'ClipboardWindows'))
-elif platform == 'linux':
-    _clipboards.append(
-        ('xclip', 'clipboard_xclip', 'ClipboardXclip'))
-    _clipboards.append(
-        ('xsel', 'clipboard_xsel', 'ClipboardXsel'))
-    _clipboards.append(
-        ('dbusklipper', 'clipboard_dbusklipper', 'ClipboardDbusKlipper'))
-    _clipboards.append(
-        ('gtk3', 'clipboard_gtk3', 'ClipboardGtk3'))
+# PYDE
+#if platform == 'android':
+#    _clipboards.append(
+#        ('android', 'clipboard_android', 'ClipboardAndroid'))
+#elif platform == 'macosx':
+#    _clipboards.append(
+#        ('nspaste', 'clipboard_nspaste', 'ClipboardNSPaste'))
+#elif platform == 'win':
+#    _clipboards.append(
+#        ('winctypes', 'clipboard_winctypes', 'ClipboardWindows'))
+#elif platform == 'linux':
+#    _clipboards.append(
+#        ('xclip', 'clipboard_xclip', 'ClipboardXclip'))
+#    _clipboards.append(
+#        ('xsel', 'clipboard_xsel', 'ClipboardXsel'))
+#    _clipboards.append(
+#        ('dbusklipper', 'clipboard_dbusklipper', 'ClipboardDbusKlipper'))
+#    _clipboards.append(
+#        ('gtk3', 'clipboard_gtk3', 'ClipboardGtk3'))
+# end PYDE
 
 if USE_SDL2:
     _clipboards.append(

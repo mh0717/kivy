@@ -1481,6 +1481,12 @@ class WindowBase(EventDispatcher):
             self.render_context = RenderContext()
             self.canvas = Canvas()
             self.render_context.add(self.canvas)
+            
+            # PYDE
+            from kivy.graphics.context import get_context
+            get_context().reload()
+            Clock.schedule_once(lambda x: self.canvas.ask_update(), 0)
+            # end PYDE
 
         else:
             # if we get initialized more than once, then reload opengl state
@@ -2481,6 +2487,16 @@ class WindowBase(EventDispatcher):
             This feature requires the SDL2 window provider.
         '''
         pass
+        
+    # PYDE
+    def ensureWindow(self):
+        Logger.info('ensureWindow')
+        if (not self.initialized):
+            Logger.info('createWindow')
+            self.create_window()
+            self.register()
+            self.initialized = True
+    # end PYDE
 
 
 #: Instance of a :class:`WindowBase` implementation

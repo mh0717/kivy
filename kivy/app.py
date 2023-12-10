@@ -930,6 +930,9 @@ Context.html#getFilesDir()>`_ is returned.
                 Logger.critical('App.root must be an _instance_ of Widget')
                 raise Exception('Invalid instance in App.root')
             from kivy.core.window import Window
+            # PYDE
+            Window.ensureWindow()
+            # end PYDE
             Window.add_widget(self.root)
 
         # Check if the window is already created

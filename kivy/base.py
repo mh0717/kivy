@@ -133,7 +133,7 @@ class EventLoopBase(EventDispatcher):
     def ensure_window(self):
         '''Ensure that we have a window.
         '''
-        import kivy.core.window  # NOQA
+        import kivy.core.window as crwindow # NOQA
         if not self.window:
             Logger.critical('App: Unable to get a Window, abort.')
             sys.exit(1)
@@ -459,6 +459,10 @@ class EventLoopBase(EventDispatcher):
         self.close()
         if self.window:
             self.window.close()
+        # PYDE
+        from kivy.core.window import Window
+        Window.close()
+        # end PYDE
 
     def on_stop(self):
         '''Event handler for `on_stop` events which will be fired right
@@ -481,6 +485,11 @@ EventLoop = EventLoopBase()
 
 
 def _runTouchApp_prepare(widget=None):
+    # PYDE
+    from kivy.core.window import Window
+    Window.ensureWindow()
+    # end PYDE
+    
     from kivy.input import MotionEventFactory, kivy_postproc_modules
 
     # Ok, we got one widget, and we are not in embedded mode
@@ -615,3 +624,7 @@ def stopTouchApp():
         return
     Logger.info('Base: Leaving application in progress...')
     EventLoop.close()
+    # PYDE
+    from kivy.core.window import Window
+    Window.close()
+    #end PYDE
